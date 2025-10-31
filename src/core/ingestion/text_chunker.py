@@ -13,6 +13,27 @@ class TextChunker:
     """Chunks text into token-aware segments"""
     
     def __init__(self, chunk_size: int = 1024, chunk_overlap: int = 128, strategy: str = "token-aware"):
+        # Validate chunk_size
+        if chunk_size <= 0:
+            raise ValueError(f"chunk_size must be positive, got {chunk_size}")
+        
+        # Validate chunk_overlap
+        if chunk_overlap < 0:
+            raise ValueError(f"chunk_overlap must be non-negative, got {chunk_overlap}")
+        
+        # Validate overlap is less than chunk_size
+        if chunk_overlap >= chunk_size:
+            raise ValueError(f"chunk_overlap ({chunk_overlap}) must be less than chunk_size ({chunk_size})")
+        
+        # Validate overlap is less than chunk_size
+        if chunk_overlap >= chunk_size:
+            raise ValueError(f"chunk_overlap ({chunk_overlap}) must be less than chunk_size ({chunk_size})")
+        
+        # Validate strategy
+        valid_strategies = ["token-aware", "sentence", "paragraph", "fixed"]
+        if strategy not in valid_strategies:
+            raise ValueError(f"Invalid strategy '{strategy}'. Must be one of {valid_strategies}")
+        
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
         self.strategy = strategy
@@ -40,6 +61,12 @@ class TextChunker:
         Returns:
             List of chunks with metadata
         """
+        # Validate input type
+        if text is None:
+            raise TypeError("text cannot be None")
+        if not isinstance(text, str):
+            raise TypeError(f"text must be a string, got {type(text).__name__}")
+            
         if not text or not text.strip():
             return []
         
@@ -55,7 +82,7 @@ class TextChunker:
                 "chunk_id": i,
                 "text": chunk_text,
                 "char_count": len(chunk_text),
-                **(metadata or {})
+                "metadata": metadata or {}
             }
             result.append(chunk)
         
@@ -77,12 +104,48 @@ class TextChunker:
         return chunks
     
     def _sentence_based_chunking(self, text: str) -> List[str]:
-        """Fallback: chunk based on sentences"""
+        """Fallback: chunk based on character count with overlap"""
         import re
         
-        # Split into sentences
+        # Try to split into sentences first
         sentences = re.split(r'(?<=[.!?])\s+', text)
         
+        # If no sentences detected (no punctuation), split by character with word boundaries
+        if len(sentences) == 1:
+            if not text.strip():
+                return [text]
+            
+            chunks = []
+            start = 0
+            
+            while start < len(text):
+                # Get a chunk of the specified size
+                end = min(start + self.chunk_size, len(text))
+                
+                # If not at the end, try to break at a word boundary
+                if end < len(text):
+                    # Look backwards for a space
+                    original_end = end
+                    while end > start and text[end] not in (' ', '\n', '\t'):
+                        end -= 1
+                    # If we couldn't find a space, just use the chunk_size
+                    if end == start:
+                        end = original_end
+                
+                chunk = text[start:end].strip()
+                if chunk:
+                    chunks.append(chunk)
+                
+                # Move start forward, accounting for overlap
+                # Use the position after stripping to determine next start
+                next_start = start + self.chunk_size - self.chunk_overlap
+                if next_start <= start:  # Prevent infinite loop
+                    next_start = start + 1
+                start = next_start
+                
+            return chunks if chunks else [text]
+        
+        # Process sentences
         chunks = []
         current_chunk = []
         current_length = 0
@@ -92,15 +155,25 @@ class TextChunker:
             
             if current_length + sentence_length > self.chunk_size and current_chunk:
                 chunks.append(' '.join(current_chunk))
-                # Keep overlap
-                overlap_sentences = current_chunk[-(self.chunk_overlap // 100):]
-                current_chunk = overlap_sentences + [sentence]
-                current_length = sum(len(s) for s in current_chunk)
+                # Keep last few characters for overlap
+                if self.chunk_overlap > 0:
+                    overlap_text = ' '.join(current_chunk)
+                    if len(overlap_text) > self.chunk_overlap:
+                        overlap_text = overlap_text[-self.chunk_overlap:]
+                        # Start new chunk with overlap
+                        current_chunk = [sentence]
+                        current_length = len(overlap_text) + sentence_length
+                    else:
+                        current_chunk = [sentence]
+                        current_length = sentence_length
+                else:
+                    current_chunk = [sentence]
+                    current_length = sentence_length
             else:
                 current_chunk.append(sentence)
-                current_length += sentence_length
+                current_length += sentence_length + 1  # +1 for space
         
         if current_chunk:
             chunks.append(' '.join(current_chunk))
         
-        return chunks
+        return chunks if chunks else [text]

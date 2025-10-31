@@ -84,7 +84,7 @@ class TestBasicChunking:
     
     def test_chunk_long_text(self):
         """Test chunking long text"""
-        chunker = TextChunker(chunk_size=100, chunk_overlap=20)
+        chunker = TextChunker(chunk_size=100, chunk_overlap=20, strategy="sentence")
         text = "word " * 50  # 250 characters (reduced for speed)
         chunks = chunker.chunk_text(text)
         
@@ -104,7 +104,7 @@ class TestBasicChunking:
     
     def test_chunk_ids_sequential(self):
         """Test chunk IDs are sequential"""
-        chunker = TextChunker(chunk_size=50)
+        chunker = TextChunker(chunk_size=50, chunk_overlap=10)
         text = "word " * 50
         chunks = chunker.chunk_text(text)
         
@@ -131,7 +131,7 @@ class TestChunkingStrategies:
     
     def test_token_aware_strategy(self):
         """Test token-aware chunking"""
-        chunker = TextChunker(strategy="token-aware", chunk_size=100)
+        chunker = TextChunker(strategy="token-aware", chunk_size=100, chunk_overlap=20)
         text = "This is a test. " * 50
         chunks = chunker.chunk_text(text)
         
@@ -162,7 +162,7 @@ class TestChunkingStrategies:
     
     def test_fixed_strategy(self):
         """Test fixed-size chunking"""
-        chunker = TextChunker(strategy="fixed", chunk_size=50)
+        chunker = TextChunker(strategy="fixed", chunk_size=50, chunk_overlap=10)
         text = "a" * 200
         chunks = chunker.chunk_text(text)
         
@@ -184,7 +184,7 @@ class TestEdgeCases:
     
     def test_very_long_single_word(self):
         """Test chunking very long single word"""
-        chunker = TextChunker(chunk_size=50)
+        chunker = TextChunker(chunk_size=50, chunk_overlap=10)
         text = "a" * 50  # Reduced for speed
         chunks = chunker.chunk_text(text)
         
@@ -451,7 +451,7 @@ class TestPerformance:
     
     def test_many_small_chunks(self):
         """Test creating many small chunks"""
-        chunker = TextChunker(chunk_size=50, chunk_overlap=10)
+        chunker = TextChunker(chunk_size=50, chunk_overlap=10, strategy="sentence")
         text = "word " * 100  # Reduced from 1000
         chunks = chunker.chunk_text(text)
         
@@ -482,7 +482,7 @@ class TestChunkQuality:
     
     def test_chunk_boundaries_sensible(self):
         """Test that chunks break at sensible boundaries"""
-        chunker = TextChunker(strategy="sentence", chunk_size=100)
+        chunker = TextChunker(strategy="sentence", chunk_size=100, chunk_overlap=20)
         text = "First sentence. Second sentence. Third sentence."
         chunks = chunker.chunk_text(text)
         
@@ -495,7 +495,7 @@ class TestChunkQuality:
     
     def test_preserve_words(self):
         """Test that words are not split (when possible)"""
-        chunker = TextChunker(strategy="token-aware", chunk_size=50)
+        chunker = TextChunker(strategy="token-aware", chunk_size=50, chunk_overlap=10)
         text = "Supercalifragilisticexpialidocious is a long word"
         chunks = chunker.chunk_text(text)
         
@@ -504,7 +504,7 @@ class TestChunkQuality:
     
     def test_metadata_preservation(self):
         """Test that metadata is preserved in all chunks"""
-        chunker = TextChunker(chunk_size=50)
+        chunker = TextChunker(chunk_size=50, chunk_overlap=10)
         text = "word " * 50
         metadata = {"doc_id": "123", "author": "test", "date": "2025-10-31"}
         
