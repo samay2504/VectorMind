@@ -3,6 +3,7 @@ Ingestion Package - Document processing components
 """
 
 from .text_chunker import TextChunker
+from .embedder import Embedder
 from .pdf_processor import PDFProcessor
 from .image_processor import ImageProcessor
 
@@ -21,6 +22,7 @@ except ImportError:
 
 __all__ = [
     "TextChunker",
+    "Embedder",
     "PDFProcessor",
     "ImageProcessor",
     "DOCXProcessor",
