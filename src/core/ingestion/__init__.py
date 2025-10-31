@@ -2,9 +2,9 @@
 Ingestion Package - Document processing components
 """
 
-from src.core.ingestion.text_chunker import TextChunker
-from src.core.ingestion.pdf_processor import PDFProcessor
-from src.core.ingestion.image_processor import ImageProcessor
+from .text_chunker import TextChunker
+from .pdf_processor import PDFProcessor
+from .image_processor import ImageProcessor
 
 # Optional processors (require additional dependencies)
 try:
