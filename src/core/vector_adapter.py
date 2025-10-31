@@ -239,23 +239,68 @@ class QdrantAdapter(VectorDBAdapter):
 
 
 class MilvusAdapter(VectorDBAdapter):
-    """Milvus vector database adapter (Fallback)"""
+    """Milvus vector database adapter (Fallback) - supports local and Zilliz Cloud"""
 
-    def __init__(self, url: str, collection_name: str, vector_size: int):
-        self.url = url
+    def __init__(
+        self, 
+        uri: str, 
+        collection_name: str, 
+        vector_size: int,
+        token: str = None,
+        user: str = None,
+        password: str = None
+    ):
+        self.uri = uri
         self.collection_name = collection_name
         self.vector_size = vector_size
+        self.token = token
+        self.user = user
+        self.password = password
         self._connection_alias = "default"
         self._initialize_client()
 
     def _initialize_client(self):
-        """Initialize Milvus client"""
+        """Initialize Milvus client - supports both local and Zilliz Cloud"""
         try:
             from pymilvus import connections
 
-            host, port = self.url.split(":")
-            connections.connect(alias=self._connection_alias, host=host, port=int(port))
-            logger.info(f"Milvus client initialized: {self.url}")
+            # Determine if it's a cloud connection (URI contains https://)
+            is_cloud = self.uri.startswith("https://")
+            
+            if is_cloud:
+                # Zilliz Cloud connection with token authentication
+                logger.info(f"Connecting to Zilliz Cloud: {self.uri}")
+                connections.connect(
+                    alias=self._connection_alias,
+                    uri=self.uri,
+                    token=self.token,
+                )
+                logger.info("Zilliz Cloud client initialized successfully")
+            else:
+                # Local Milvus connection
+                # Parse host and port from URI
+                uri_clean = self.uri.replace("http://", "").replace("https://", "")
+                if ":" in uri_clean:
+                    host, port = uri_clean.split(":")
+                    port = int(port)
+                else:
+                    host = uri_clean
+                    port = 19530  # Default Milvus port
+                
+                # Connect with optional user/password
+                connect_params = {
+                    "alias": self._connection_alias,
+                    "host": host,
+                    "port": port,
+                }
+                
+                if self.user and self.password:
+                    connect_params["user"] = self.user
+                    connect_params["password"] = self.password
+                
+                connections.connect(**connect_params)
+                logger.info(f"Local Milvus client initialized: {host}:{port}")
+                
         except ImportError:
             logger.error("pymilvus not installed")
             raise
@@ -422,11 +467,14 @@ class VectorDBManager:
     def __init__(
         self,
         qdrant_url: str,
-        milvus_url: str,
+        milvus_uri: str,
         collection_name: str,
         vector_size: int,
         max_retries: int = 3,
         qdrant_api_key: str = None,
+        milvus_token: str = None,
+        milvus_user: str = None,
+        milvus_password: str = None,
     ):
         self.collection_name = collection_name
         self.vector_size = vector_size
@@ -435,7 +483,14 @@ class VectorDBManager:
         # Initialize both adapters
         self.qdrant = QdrantAdapter(qdrant_url, collection_name, vector_size, max_retries, qdrant_api_key)
         try:
-            self.milvus = MilvusAdapter(milvus_url, collection_name, vector_size)
+            self.milvus = MilvusAdapter(
+                uri=milvus_uri,
+                collection_name=collection_name,
+                vector_size=vector_size,
+                token=milvus_token,
+                user=milvus_user,
+                password=milvus_password,
+            )
             self.milvus_available = True
         except Exception as e:
             logger.warning(f"Milvus not available, will use Qdrant only: {e}")

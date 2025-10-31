@@ -41,10 +41,16 @@ class Settings(BaseSettings):
     qdrant_health_check_timeout: int = Field(default=5, alias="QDRANT_HEALTH_CHECK_TIMEOUT")
     qdrant_max_retries: int = Field(default=3, alias="QDRANT_MAX_RETRIES")
 
-    # Milvus (Fallback)
-    milvus_url: str = Field(default="localhost:19530", alias="MILVUS_URL")
+    # Milvus (Fallback - supports both local and Zilliz Cloud)
+    milvus_uri: str = Field(default="http://localhost:19530", alias="MILVUS_URI")
+    milvus_token: Optional[str] = Field(default=None, alias="MILVUS_TOKEN")
+    milvus_user: Optional[str] = Field(default=None, alias="MILVUS_USER")
+    milvus_password: Optional[str] = Field(default=None, alias="MILVUS_PASSWORD")
     milvus_collection: str = Field(default="multimodal_docs", alias="MILVUS_COLLECTION")
     milvus_vector_size: int = Field(default=384, alias="MILVUS_VECTOR_SIZE")
+    
+    # Legacy Milvus URL support (backward compatibility)
+    milvus_url: Optional[str] = Field(default=None, alias="MILVUS_URL")
 
     # MongoDB
     mongo_uri: str = Field(default="mongodb://localhost:27017", alias="MONGO_URI")

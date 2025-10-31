@@ -32,11 +32,14 @@ async def lifespan(app: FastAPI):
     # Vector DB
     vector_manager = VectorDBManager(
         qdrant_url=settings.qdrant_url,
-        milvus_url=settings.milvus_url,
+        milvus_uri=settings.milvus_uri,
         collection_name=settings.qdrant_collection,
         vector_size=settings.qdrant_vector_size,
         max_retries=settings.qdrant_max_retries,
         qdrant_api_key=settings.qdrant_api_key,
+        milvus_token=settings.milvus_token,
+        milvus_user=settings.milvus_user,
+        milvus_password=settings.milvus_password,
     )
     app.state.vector_manager = vector_manager
     logger.info("Vector DB manager initialized")

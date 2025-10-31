@@ -80,11 +80,14 @@ def process_document_async(self, file_path: str, collection_name: str, user_id: 
         from src.config import settings
         vector_manager = VectorDBManager(
             qdrant_url=settings.qdrant_url,
-            milvus_url=settings.milvus_url,
+            milvus_uri=settings.milvus_uri,
             collection_name=settings.qdrant_collection,
             vector_size=settings.qdrant_vector_size,
             max_retries=settings.qdrant_max_retries,
             qdrant_api_key=settings.qdrant_api_key,
+            milvus_token=settings.milvus_token,
+            milvus_user=settings.milvus_user,
+            milvus_password=settings.milvus_password,
         )
         doc_id = str(uuid.uuid4())
         
