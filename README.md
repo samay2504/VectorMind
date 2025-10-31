@@ -778,4 +778,4 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
-**Built with ❤️ for production AI systems**
+**Built with ❤️ by Samay Mehar**
