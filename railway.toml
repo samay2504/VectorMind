@@ -1,0 +1,32 @@
+# Railway Deployment Configuration
+# https://railway.app/
+
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "uvicorn src.api.main:app --host 0.0.0.0 --port $PORT"
+healthcheckPath = "/healthz"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+[env]
+# Railway will automatically inject PORT
+# Add your environment variables in Railway dashboard
+
+[[services]]
+name = "api"
+startCommand = "uvicorn src.api.main:app --host 0.0.0.0 --port $PORT --workers 4"
+
+[[services]]
+name = "frontend"
+startCommand = "streamlit run frontend/streamlit_app.py --server.port $PORT --server.address 0.0.0.0"
+
+[[services]]
+name = "celery-worker"
+startCommand = "celery -A src.workers.celery_app worker --loglevel=info"
+
+[[services]]
+name = "celery-beat"
+startCommand = "celery -A src.workers.celery_app beat --loglevel=info"

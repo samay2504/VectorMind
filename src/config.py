@@ -120,6 +120,18 @@ class Settings(BaseSettings):
     celery_result_backend: str = Field(
         default="redis://localhost:6379/2", alias="CELERY_RESULT_BACKEND"
     )
+    
+    # File upload
+    max_upload_size_mb: int = Field(default=100, alias="MAX_UPLOAD_SIZE_MB")
+    allowed_extensions: str = Field(
+        default="txt,pdf,png,jpg,jpeg,gif,docx,xlsx,csv",
+        alias="ALLOWED_EXTENSIONS"
+    )
+    
+    # Conversation memory
+    conversation_memory_enabled: bool = Field(default=True, alias="CONVERSATION_MEMORY_ENABLED")
+    conversation_ttl_seconds: int = Field(default=3600, alias="CONVERSATION_TTL_SECONDS")
+    max_conversation_history: int = Field(default=10, alias="MAX_CONVERSATION_HISTORY")
 
     class Config:
         env_file = ".env"

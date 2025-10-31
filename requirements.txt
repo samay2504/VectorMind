@@ -3,6 +3,7 @@ fastapi==0.109.0
 uvicorn[standard]==0.27.0
 gunicorn==21.2.0
 python-multipart==0.0.6
+streamlit==1.31.0
 
 # Database Clients
 qdrant-client==1.7.3
@@ -24,6 +25,10 @@ pdf2image==1.17.0
 pypdf==4.0.1
 pdfplumber==0.10.4
 pillow==10.2.0
+
+# Document Processing
+python-docx==1.1.0
+openpyxl==3.1.2
 
 # NLP & Retrieval
 rank-bm25==0.2.2

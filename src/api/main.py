@@ -86,12 +86,13 @@ def create_app() -> FastAPI:
     
     # Import and include routers
     from src.api.routes import health
-    from src.api.routes import ingest, query, dsar
+    from src.api.routes import ingest, query, dsar, conversation
     
     app.include_router(health.router, tags=["Health"])
     app.include_router(ingest.router, prefix="/ingest", tags=["Ingestion"])
     app.include_router(query.router, prefix="/query", tags=["Query"])
     app.include_router(dsar.router, prefix="/dsar", tags=["DSAR"])
+    app.include_router(conversation.router, prefix="/conversation", tags=["Conversation"])
     
     # Prometheus metrics (if enabled)
     if settings.enable_metrics:

@@ -1,0 +1,50 @@
+# Render Deployment Configuration
+# https://render.com/
+
+services:
+  # API Service
+  - type: web
+    name: multimodal-rag-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn src.api.main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: APP_ENV
+        value: production
+      - key: DEBUG
+        value: false
+    
+  # Frontend Service  
+  - type: web
+    name: multimodal-rag-frontend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run frontend/streamlit_app.py --server.port $PORT --server.address 0.0.0.0
+    envVars:
+      - key: PUBLIC_API_URL
+        sync: false  # Set in Render dashboard
+    
+  # Celery Worker
+  - type: worker
+    name: multimodal-rag-worker
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: celery -A src.workers.celery_app worker --loglevel=info
+    
+  # Celery Beat
+  - type: worker
+    name: multimodal-rag-beat
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: celery -A src.workers.celery_app beat --loglevel=info
+
+databases:
+  # Add your database connections in Render dashboard
+  - name: mongodb
+    plan: starter
+  
+  - name: redis
+    plan: starter
