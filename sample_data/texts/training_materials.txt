@@ -1,0 +1,234 @@
+CloudSync Platform - Training Materials
+
+Course: CloudSync Fundamentals
+Duration: 8 hours (self-paced)
+Level: Beginner to Intermediate
+
+Module 1: Introduction to CloudSync (1 hour)
+
+1.1 What is CloudSync?
+- Multi-cloud management platform overview
+- Key features and capabilities
+- Benefits of using CloudSync
+- Use cases and customer success stories
+
+1.2 Platform Architecture
+- High-level architecture diagram
+- Core components and services
+- Integration with cloud providers
+- Data flow and security model
+
+1.3 Getting Started
+- Account registration and setup
+- Navigation and user interface
+- Dashboard customization
+- Basic configuration
+
+Module 2: Resource Management (2 hours)
+
+2.1 Understanding Cloud Resources
+- Virtual machines and instances
+- Containers and Kubernetes clusters
+- Storage volumes and databases
+- Networking components
+
+2.2 Resource Discovery
+- Automatic resource discovery
+- Manual resource import
+- Tagging and organization
+- Search and filtering
+
+2.3 Provisioning Resources
+- Creating new resources via UI
+- Using templates and blueprints
+- Automated provisioning workflows
+- Infrastructure as Code integration
+
+2.4 Resource Lifecycle Management
+- Starting, stopping, and terminating resources
+- Resizing and configuration changes
+- Backup and snapshot management
+- Resource cloning and migration
+
+Module 3: Cost Optimization (1.5 hours)
+
+3.1 Cost Visibility
+- Understanding the cost dashboard
+- Cost allocation and chargebacks
+- Budget creation and tracking
+- Cost trend analysis
+
+3.2 Optimization Techniques
+- Right-sizing recommendations
+- Idle resource detection
+- Reserved instance planning
+- Spot instance management
+- Storage optimization
+
+3.3 Cost Alerts and Reports
+- Setting up budget alerts
+- Scheduled cost reports
+- Anomaly detection
+- Cost forecasting
+
+Module 4: Monitoring and Alerting (1.5 hours)
+
+4.1 Performance Monitoring
+- Real-time metrics and dashboards
+- Custom metric creation
+- Historical data analysis
+- Performance baselines
+
+4.2 Alert Configuration
+- Creating alert rules
+- Notification channels (email, Slack, PagerDuty)
+- Alert severity levels
+- Alert escalation policies
+
+4.3 Log Management
+- Centralized log collection
+- Log search and filtering
+- Log retention policies
+- Log-based alerting
+
+Module 5: Security and Compliance (1.5 hours)
+
+5.1 Access Control
+- User and role management
+- Multi-factor authentication setup
+- API key generation and management
+- SSO integration
+
+5.2 Security Best Practices
+- Encryption configuration
+- Network security groups
+- Vulnerability scanning
+- Security policy enforcement
+
+5.3 Compliance Monitoring
+- Compliance framework selection (GDPR, HIPAA, etc.)
+- Compliance dashboard
+- Audit trail and reporting
+- Remediation workflows
+
+Module 6: Automation and Integration (1.5 hours)
+
+6.1 Automation Capabilities
+- Scheduled tasks and workflows
+- Event-driven automation
+- Policy-based automation
+- Auto-scaling configuration
+
+6.2 API Integration
+- API authentication and basics
+- Common API use cases
+- SDK installation and usage
+- Webhook configuration
+
+6.3 CI/CD Integration
+- Jenkins integration
+- GitHub Actions integration
+- GitLab CI/CD integration
+- Deployment pipeline automation
+
+Hands-On Labs:
+
+Lab 1: Setting Up Your First Cloud Environment (30 minutes)
+- Create a CloudSync account
+- Connect AWS, Azure, or GCP account
+- Discover existing resources
+- Create a custom dashboard
+
+Lab 2: Deploying a Multi-Tier Application (45 minutes)
+- Create a virtual network
+- Deploy database instance
+- Deploy application servers
+- Configure load balancer
+- Set up monitoring and alerts
+
+Lab 3: Implementing Cost Optimization (30 minutes)
+- Analyze current spending
+- Implement right-sizing recommendations
+- Set up budget alerts
+- Create cost allocation tags
+
+Lab 4: Configuring Security and Compliance (45 minutes)
+- Enable multi-factor authentication
+- Create role-based access policies
+- Run compliance scan
+- Remediate security findings
+
+Lab 5: Building Automation Workflows (1 hour)
+- Create scheduled task for resource cleanup
+- Set up auto-scaling policy
+- Configure backup automation
+- Create custom workflow with API
+
+Assessment:
+- 40 multiple-choice questions
+- 80% passing score
+- Certificate of completion upon passing
+- Valid for 1 year
+
+Additional Resources:
+
+Video Tutorials:
+- Introduction to CloudSync (15 minutes)
+- Resource Management Walkthrough (25 minutes)
+- Cost Optimization Strategies (20 minutes)
+- Security Best Practices (30 minutes)
+- API Integration Guide (35 minutes)
+
+Documentation:
+- User Guide (comprehensive manual)
+- API Reference (complete endpoint documentation)
+- Best Practices Guide
+- Troubleshooting Guide
+- FAQ (Frequently Asked Questions)
+
+Community Resources:
+- Community Forum: https://community.cloudsync.com
+- Slack Channel: #cloudsync-users
+- Monthly webinars and Q&A sessions
+- User conference (annual)
+
+Support Channels:
+- Email: support@techcorp.com
+- Phone: +1 (555) 123-4567 (24/7)
+- Live chat: Available during business hours
+- Knowledge base: https://kb.cloudsync.com
+
+Certification Path:
+
+1. CloudSync Certified Associate
+   - Prerequisites: Complete Fundamentals course
+   - Exam: 60 questions, 90 minutes
+   - Cost: $150
+   - Valid: 2 years
+
+2. CloudSync Certified Professional
+   - Prerequisites: Associate certification + 6 months experience
+   - Exam: 80 questions, 120 minutes
+   - Cost: $300
+   - Valid: 2 years
+
+3. CloudSync Certified Architect
+   - Prerequisites: Professional certification + 2 years experience
+   - Exam: 100 questions, 180 minutes + practical exam
+   - Cost: $500
+   - Valid: 3 years
+
+Training Tips:
+- Complete modules in order
+- Hands-on practice is essential
+- Join study groups in community forum
+- Review documentation for detailed information
+- Prepare for certification early
+- Stay updated with platform releases
+
+Course Updates:
+This training material is updated quarterly to reflect the latest CloudSync platform features and best practices.
+
+Last Updated: October 2025
+Version: 5.2.1
+Course Code: CS-FUND-101
