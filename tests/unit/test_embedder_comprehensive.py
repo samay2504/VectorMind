@@ -26,7 +26,7 @@ class TestEmbedderInitialization:
         """Test default embedder initialization"""
         embedder = Embedder()
         assert embedder.model is not None
-        assert embedder.model_name == "sentence-transformers/all-MiniLM-L6-v2"
+        assert embedder.model_name == "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
         assert embedder.device in ["cpu", "cuda"]
         assert embedder.batch_size == 32
         assert embedder.embedding_dim > 0
@@ -528,11 +528,7 @@ class TestEmbedderRealWorldScenarios:
         # All should have same dimensionality
         assert all(len(emb) == embedder.embedding_dim for emb in embeddings)
         
-        # Note: all-MiniLM-L6-v2 is primarily an English model
-        # So cross-lingual similarity will be low
-        # For true multilingual embeddings, use a multilingual model
-        # like "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
-        
+        # With multilingual model, cross-lingual similarity should be good
         # Calculate pairwise similarities
         similarities = []
         for i in range(len(embeddings)):
@@ -542,10 +538,10 @@ class TestEmbedderRealWorldScenarios:
                 )
                 similarities.append(sim)
         
-        # For English-only model, similarities will be lower
+        # Multilingual model should capture cross-lingual semantic similarity
         avg_sim = np.mean(similarities)
-        # Just verify embeddings are generated (not NaN/zero)
-        assert avg_sim > 0.0
+        # Similar meaning across languages should have decent similarity
+        assert avg_sim > 0.4  # Multilingual models can capture cross-lingual semantics
         assert all(not np.isnan(emb).any() for emb in embeddings)
 
 
