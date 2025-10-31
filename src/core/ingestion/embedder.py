@@ -1,6 +1,21 @@
 """
 Embedding model wrapper using sentence-transformers
 Supports batching and GPU/CPU inference
+
+═══════════════════════════════════════════════════════════════════════════
+Copyright © 2025 Samay Mehar. All Rights Reserved.
+
+PROPRIETARY SOFTWARE - PATENT PENDING
+
+Author: Samay Mehar
+Created: October 31 - November 1, 2025
+Project: VectorMind (Modality RAG System)
+
+This file implements GPU-accelerated multilingual embedding system with
+automatic device detection, created entirely from scratch by Samay Mehar.
+
+Unauthorized use is strictly prohibited and may result in legal action.
+═══════════════════════════════════════════════════════════════════════════
 """
 
 import logging

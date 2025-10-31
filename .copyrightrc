@@ -1,0 +1,88 @@
+{
+  "copyright": {
+    "owner": "Samay Mehar",
+    "year": "2025",
+    "license": "Proprietary",
+    "status": "Patent Pending",
+    "project": "VectorMind (Modality RAG System)",
+    "creation_period": "October 31 - November 1, 2025",
+    "contribution": "100% (Created entirely from scratch, 0 to 100)",
+    "repository": "https://github.com/samay2504/VectorMind",
+    "legal_notice": "All Rights Reserved. Unauthorized use is strictly prohibited and may result in legal action.",
+    
+    "patent_claims": [
+      "Dynamic LLM-Based Intent Classification System",
+      "Universal Multi-Format Document Processing Pipeline",
+      "Auto-Collection Vector Database Architecture",
+      "Context-Aware Conversational AI Routing",
+      "GPU-Accelerated Multilingual Embedding System",
+      "Cyber-Themed Real-Time RAG Interface",
+      "Production-Grade Error Recovery System",
+      "Unified Multi-Cloud Integration Architecture"
+    ],
+    
+    "protected_components": {
+      "backend": {
+        "path": "src/",
+        "description": "FastAPI backend with all core logic",
+        "author": "Samay Mehar",
+        "original": true
+      },
+      "frontend": {
+        "path": "frontend/",
+        "description": "Streamlit UI with cyber theme",
+        "author": "Samay Mehar",
+        "original": true
+      },
+      "core_modules": {
+        "vector_adapter": "Auto-collection vector DB management",
+        "llm_provider": "Multi-provider fallback system",
+        "embedder": "GPU-accelerated embeddings",
+        "text_chunker": "Semantic boundary detection",
+        "query_router": "Dynamic LLM classification",
+        "ingest_pipeline": "Universal file processing"
+      },
+      "algorithms": {
+        "context_aware_routing": "3-layer classification system",
+        "auto_delimiter_detection": "CSV adaptive parsing",
+        "sparse_indexing": "MongoDB duplicate prevention",
+        "provider_failover": "Seamless LLM switching"
+      }
+    },
+    
+    "ownership_declaration": {
+      "sole_author": "Samay Mehar",
+      "percentage_created": 100,
+      "external_dependencies": false,
+      "copied_code": false,
+      "derived_work": false,
+      "original_inventions": true,
+      "intellectual_property": "Exclusively owned by Samay Mehar"
+    },
+    
+    "usage_restrictions": {
+      "reproduction": "Prohibited without written permission",
+      "modification": "Prohibited without written permission",
+      "distribution": "Prohibited without written permission",
+      "commercial_use": "Prohibited without written permission",
+      "non_commercial_use": "Prohibited without written permission",
+      "reverse_engineering": "Strictly prohibited",
+      "derivative_works": "Strictly prohibited",
+      "ai_training": "Strictly prohibited"
+    },
+    
+    "legal_remedies": [
+      "Civil damages and statutory penalties",
+      "Injunctive relief and permanent injunctions",
+      "Criminal prosecution under copyright and patent laws",
+      "Recovery of attorney's fees and court costs"
+    ],
+    
+    "contact": {
+      "name": "Samay Mehar",
+      "github": "@samay2504",
+      "repository": "https://github.com/samay2504/VectorMind",
+      "purpose": "Licensing inquiries, permissions, or legal matters"
+    }
+  }
+}

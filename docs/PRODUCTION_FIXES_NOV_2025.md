@@ -1,4 +1,14 @@
-# Production-Grade Fixes - November 1, 2025
+<!--
+═══════════════════════════════════════════════════════════════════════════
+Copyright © 2025 Samay Mehar. All Rights Reserved.
+PROPRIETARY SOFTWARE - PATENT PENDING
+Author: Samay Mehar | Created: October 31 - November 1, 2025
+VectorMind (Modality RAG System)
+Unauthorized use is strictly prohibited and may result in legal action.
+═══════════════════════════════════════════════════════════════════════════
+-->
+
+# Production Fixes - November 2025
 
 ## Critical Issues Resolved
 

@@ -1,0 +1,98 @@
+PROPRIETARY SOFTWARE LICENSE AND PATENT NOTICE
+===============================================
+
+Copyright © 2025 Samay Mehar. All Rights Reserved.
+
+PATENT PENDING - This software and all associated intellectual property 
+are subject to patent protection.
+
+AUTHOR AND INVENTOR: Samay Mehar
+CREATION DATE: October 31, 2025 - November 1, 2025
+PROJECT NAME: VectorMind (Modality RAG System)
+
+NOTICE OF PROPRIETARY RIGHTS
+-----------------------------
+This software, including but not limited to all source code, documentation,
+algorithms, architectures, designs, implementations, user interfaces, and 
+associated intellectual property, was created entirely from scratch (0 to 100)
+by Samay Mehar and is protected by copyright and patent law.
+
+ALL RIGHTS RESERVED
+-------------------
+No part of this software may be:
+- Reproduced, copied, or duplicated in any form
+- Modified, altered, or derived from
+- Distributed, published, or transmitted
+- Used for commercial or non-commercial purposes
+- Reverse engineered, decompiled, or disassembled
+- Used as a basis for any competing product or service
+
+Without express written permission from the copyright holder, Samay Mehar.
+
+PATENT CLAIMS
+-------------
+This software embodies novel and non-obvious inventions including but not 
+limited to:
+
+1. **Dynamic LLM-Based Intent Classification System**
+   - Three-layer context-aware query routing
+   - Automatic document existence detection
+   - Provider-agnostic LLM switching with state preservation
+
+2. **Universal Multi-Format Document Processing Pipeline**
+   - Adaptive CSV delimiter detection with multi-encoding fallback
+   - Format-specific content extraction for 24+ file types
+   - Unified chunking and embedding pipeline
+
+3. **Auto-Collection Vector Database Architecture**
+   - Automatic collection creation and management
+   - Multi-provider failover with Qdrant and Milvus
+   - Sparse indexing for duplicate prevention
+
+4. **Context-Aware Conversational AI Routing**
+   - Document-aware conversation classification
+   - Seamless provider switching without context loss
+   - Hybrid retrieval with dense and sparse vectors
+
+5. **GPU-Accelerated Multilingual Embedding System**
+   - Automatic GPU detection and utilization
+   - 384-dimensional multilingual embeddings
+   - Efficient batch processing and caching
+
+6. **Cyber-Themed Real-Time RAG Interface**
+   - Futuristic UI with neon gradients and animations
+   - Real-time source attribution and visualization
+   - Responsive document upload with progress tracking
+
+OWNERSHIP DECLARATION
+---------------------
+I, Samay Mehar, declare under penalty of perjury that:
+1. I am the sole creator and author of this software
+2. All code was written by me from scratch (0% to 100%)
+3. No portion was copied, adapted, or derived from any other source
+4. All algorithms and architectures are my original inventions
+5. I retain full ownership and control of all intellectual property rights
+
+LEGAL REMEDIES
+--------------
+Unauthorized use, reproduction, or distribution of this software may result in:
+- Civil damages and injunctive relief
+- Criminal prosecution under applicable copyright and patent laws
+- Recovery of actual damages, statutory damages, and attorney's fees
+- Permanent injunction against further infringement
+
+CONTACT INFORMATION
+-------------------
+For licensing inquiries, permissions, or legal matters:
+Name: Samay Mehar
+Email: [Contact via GitHub: @samay2504]
+Repository: https://github.com/samay2504/VectorMind
+
+EFFECTIVE DATE: November 1, 2025
+
+This license agreement is governed by applicable international copyright and 
+patent laws. All rights not expressly granted are reserved by Samay Mehar.
+
+═══════════════════════════════════════════════════════════════════════════
+                    UNAUTHORIZED USE IS STRICTLY PROHIBITED
+═══════════════════════════════════════════════════════════════════════════

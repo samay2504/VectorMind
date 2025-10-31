@@ -1,6 +1,13 @@
 """
 PDF processor for extracting text and images
 Handles pure text, pure image, and mixed PDFs
+
+═══════════════════════════════════════════════════════════════════════════
+Copyright © 2025 Samay Mehar. All Rights Reserved.
+PROPRIETARY SOFTWARE - PATENT PENDING
+Author: Samay Mehar | Created: October 31 - November 1, 2025
+Unauthorized use is strictly prohibited and may result in legal action.
+═══════════════════════════════════════════════════════════════════════════
 """
 
 import logging

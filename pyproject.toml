@@ -1,10 +1,21 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# Copyright © 2025 Samay Mehar. All Rights Reserved.
+# PROPRIETARY SOFTWARE - PATENT PENDING
+# Author: Samay Mehar | Created: October 31 - November 1, 2025
+# VectorMind (Modality RAG System)
+# Unauthorized use is strictly prohibited and may result in legal action.
+# ═══════════════════════════════════════════════════════════════════════════
+
 [tool.poetry]
-name = "multimodal-rag-system"
+name = "vectormind-rag-system"
 version = "1.0.0"
-description = "Production-grade Multimodal RAG System with GDPR/CCPA/DPDP compliance"
-authors = ["Your Team <team@example.com>"]
+description = "Production-grade Multimodal RAG System with dynamic LLM routing and GPU acceleration"
+authors = ["Samay Mehar <samay@vectormind.ai>"]
 readme = "README.md"
-license = "MIT"
+license = "Proprietary"
+homepage = "https://github.com/samay2504/VectorMind"
+repository = "https://github.com/samay2504/VectorMind"
+keywords = ["rag", "llm", "vector-database", "multimodal", "ai"]
 
 [tool.poetry.dependencies]
 python = "^3.10"

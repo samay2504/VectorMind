@@ -2,6 +2,21 @@
 LLM Provider System with Multiple Fallbacks
 Handles HuggingFace, Google Gemini, OpenAI, and Groq with robust error handling
 Adapted from the provided llm_provider.py with tracing and metadata support
+
+═══════════════════════════════════════════════════════════════════════════
+Copyright © 2025 Samay Mehar. All Rights Reserved.
+
+PROPRIETARY SOFTWARE - PATENT PENDING
+
+Author: Samay Mehar
+Created: October 31 - November 1, 2025
+Project: VectorMind (Modality RAG System)
+
+This file implements multi-provider LLM fallback system with state preservation,
+created entirely from scratch (0 to 100) by Samay Mehar.
+
+Unauthorized use is strictly prohibited and may result in legal action.
+═══════════════════════════════════════════════════════════════════════════
 """
 
 import logging

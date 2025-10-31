@@ -3,6 +3,23 @@ Streamlit Frontend for Multimodal RAG System
 
 A production-ready, user-friendly interface for document upload and querying.
 Designed for easy deployment on Railway, Vercel, or Render.
+
+═══════════════════════════════════════════════════════════════════════════
+Copyright © 2025 Samay Mehar. All Rights Reserved.
+
+PROPRIETARY SOFTWARE - PATENT PENDING
+
+Author: Samay Mehar
+Created: October 31 - November 1, 2025
+Project: VectorMind (Modality RAG System)
+
+This file is part of a proprietary software system created entirely from
+scratch (0 to 100) by Samay Mehar. All rights reserved. No portion of this
+code may be reproduced, distributed, or transmitted in any form without
+express written permission from the copyright holder.
+
+Unauthorized use is strictly prohibited and may result in legal action.
+═══════════════════════════════════════════════════════════════════════════
 """
 
 import streamlit as st

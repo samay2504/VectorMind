@@ -1,5 +1,20 @@
 """
 Document ingestion endpoints
+
+═══════════════════════════════════════════════════════════════════════════
+Copyright © 2025 Samay Mehar. All Rights Reserved.
+
+PROPRIETARY SOFTWARE - PATENT PENDING
+
+Author: Samay Mehar
+Created: October 31 - November 1, 2025
+Project: VectorMind (Modality RAG System)
+
+This file implements the universal multi-format document processing pipeline,
+a novel invention created entirely from scratch by Samay Mehar.
+
+Unauthorized use is strictly prohibited and may result in legal action.
+═══════════════════════════════════════════════════════════════════════════
 """
 
 import logging

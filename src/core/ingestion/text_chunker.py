@@ -1,6 +1,21 @@
 """
 Token-aware text chunking with overlap
 Uses tiktoken for accurate token counting
+
+═══════════════════════════════════════════════════════════════════════════
+Copyright © 2025 Samay Mehar. All Rights Reserved.
+
+PROPRIETARY SOFTWARE - PATENT PENDING
+
+Author: Samay Mehar
+Created: October 31 - November 1, 2025
+Project: VectorMind (Modality RAG System)
+
+This file implements semantic text chunking with boundary detection,
+created entirely from scratch (0 to 100) by Samay Mehar.
+
+Unauthorized use is strictly prohibited and may result in legal action.
+═══════════════════════════════════════════════════════════════════════════
 """
 
 import logging

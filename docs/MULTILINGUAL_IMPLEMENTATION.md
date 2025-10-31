@@ -1,4 +1,14 @@
-# Multilingual RAG System - Implementation Summary
+<!--
+═══════════════════════════════════════════════════════════════════════════
+Copyright © 2025 Samay Mehar. All Rights Reserved.
+PROPRIETARY SOFTWARE - PATENT PENDING
+Author: Samay Mehar | Created: October 31 - November 1, 2025
+VectorMind (Modality RAG System)
+Unauthorized use is strictly prohibited and may result in legal action.
+═══════════════════════════════════════════════════════════════════════════
+-->
+
+# Multilingual RAG Implementation Guide
 
 ## Overview
 Successfully upgraded the RAG system to use a multilingual embedding model, enabling semantic search and document retrieval across 50+ languages.

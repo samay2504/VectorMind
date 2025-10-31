@@ -1,5 +1,21 @@
 """
 Query endpoints for RAG
+
+═══════════════════════════════════════════════════════════════════════════
+Copyright © 2025 Samay Mehar. All Rights Reserved.
+
+PROPRIETARY SOFTWARE - PATENT PENDING
+
+Author: Samay Mehar
+Created: October 31 - November 1, 2025
+Project: VectorMind (Modality RAG System)
+
+This file implements the dynamic LLM-based intent classification system and
+context-aware conversational AI routing, novel inventions created entirely
+from scratch (0 to 100) by Samay Mehar.
+
+Unauthorized use is strictly prohibited and may result in legal action.
+═══════════════════════════════════════════════════════════════════════════
 """
 
 import logging

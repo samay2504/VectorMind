@@ -1,10 +1,35 @@
-# Multimodal RAG System
+# VectorMind - Multimodal RAG System
+
+```
+╔══════════════════════════════════════════════════════════════════════╗
+║                                                                      ║
+║              Copyright © 2025 Samay Mehar. All Rights Reserved.     ║
+║                          PATENT PENDING                              ║
+║                                                                      ║
+║  Proprietary Software - Created entirely from scratch (0 to 100)    ║
+║  by Samay Mehar. Unauthorized use is strictly prohibited.           ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+```
 
 > Production-grade Retrieval-Augmented Generation system with multimodal support (text, images, PDFs), GDPR/CCPA/DPDP compliance, and automatic LLM/vector DB failover.
 
-[![CI](https://github.com/yourusername/multimodal-rag/workflows/CI/badge.svg)](https://github.com/yourusername/multimodal-rag/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](./LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Author](https://img.shields.io/badge/Author-Samay%20Mehar-brightgreen.svg)](https://github.com/samay2504)
+
+## ⚠️ LEGAL NOTICE
+
+**This software is PROPRIETARY and protected by copyright and patent law.**
+
+- **Author & Owner:** Samay Mehar
+- **Creation Period:** October 31 - November 1, 2025
+- **Rights:** All Rights Reserved
+- **Status:** Patent Pending
+
+**Unauthorized use, reproduction, or distribution is strictly prohibited and may result in legal action.**
+
+See [LICENSE](./LICENSE) and [COPYRIGHT_NOTICE.md](./COPYRIGHT_NOTICE.md) for complete legal information.
 
 ## 🚀 Features
 
