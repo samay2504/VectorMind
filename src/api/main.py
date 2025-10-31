@@ -30,15 +30,22 @@ async def lifespan(app: FastAPI):
     import redis
     
     # Vector DB
-    vector_manager = VectorDBManager()
+    vector_manager = VectorDBManager(
+        qdrant_url=settings.qdrant_url,
+        milvus_url=settings.milvus_url,
+        collection_name=settings.qdrant_collection,
+        vector_size=settings.qdrant_vector_size,
+        max_retries=settings.qdrant_max_retries,
+        qdrant_api_key=settings.qdrant_api_key,
+    )
     app.state.vector_manager = vector_manager
     logger.info("Vector DB manager initialized")
     
     # MongoDB
     mongo_client = MongoClient(settings.mongo_uri)
     app.state.mongo_client = mongo_client
-    app.state.mongo_db = mongo_client[settings.mongo_db_name]
-    logger.info(f"MongoDB connected: {settings.mongo_db_name}")
+    app.state.mongo_db = mongo_client[settings.mongo_db]
+    logger.info(f"MongoDB connected: {settings.mongo_db}")
     
     # Redis
     redis_client = redis.from_url(settings.redis_url, decode_responses=True)

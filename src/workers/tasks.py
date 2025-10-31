@@ -77,7 +77,15 @@ def process_document_async(self, file_path: str, collection_name: str, user_id: 
         embeddings = embedder.embed_texts(chunk_texts)
         
         # Store in vector DB
-        vector_manager = VectorDBManager()
+        from src.config import settings
+        vector_manager = VectorDBManager(
+            qdrant_url=settings.qdrant_url,
+            milvus_url=settings.milvus_url,
+            collection_name=settings.qdrant_collection,
+            vector_size=settings.qdrant_vector_size,
+            max_retries=settings.qdrant_max_retries,
+            qdrant_api_key=settings.qdrant_api_key,
+        )
         doc_id = str(uuid.uuid4())
         
         for i, (chunk, embedding) in enumerate(zip(chunks, embeddings)):

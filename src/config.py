@@ -35,6 +35,7 @@ class Settings(BaseSettings):
 
     # Qdrant (Primary)
     qdrant_url: str = Field(default="http://localhost:6333", alias="QDRANT_URL")
+    qdrant_api_key: Optional[str] = Field(default=None, alias="QDRANT_API_KEY")
     qdrant_collection: str = Field(default="multimodal_docs", alias="QDRANT_COLLECTION")
     qdrant_vector_size: int = Field(default=384, alias="QDRANT_VECTOR_SIZE")
     qdrant_health_check_timeout: int = Field(default=5, alias="QDRANT_HEALTH_CHECK_TIMEOUT")

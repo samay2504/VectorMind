@@ -70,11 +70,12 @@ class VectorDBAdapter(ABC):
 class QdrantAdapter(VectorDBAdapter):
     """Qdrant vector database adapter (Primary)"""
 
-    def __init__(self, url: str, collection_name: str, vector_size: int, max_retries: int = 3):
+    def __init__(self, url: str, collection_name: str, vector_size: int, max_retries: int = 3, api_key: str = None):
         self.url = url
         self.collection_name = collection_name
         self.vector_size = vector_size
         self.max_retries = max_retries
+        self.api_key = api_key
         self._client = None
         self._initialize_client()
 
@@ -84,10 +85,16 @@ class QdrantAdapter(VectorDBAdapter):
             from qdrant_client import QdrantClient
             from qdrant_client.models import Distance, VectorParams
 
-            self._client = QdrantClient(url=self.url)
+            # Initialize client with API key if provided (for Qdrant Cloud)
+            if self.api_key:
+                self._client = QdrantClient(url=self.url, api_key=self.api_key)
+                logger.info(f"Qdrant client initialized with API key: {self.url}")
+            else:
+                self._client = QdrantClient(url=self.url)
+                logger.info(f"Qdrant client initialized: {self.url}")
+            
             self._distance = Distance
             self._vector_params = VectorParams
-            logger.info(f"Qdrant client initialized: {self.url}")
         except ImportError:
             logger.error("qdrant-client not installed")
             raise
@@ -419,13 +426,14 @@ class VectorDBManager:
         collection_name: str,
         vector_size: int,
         max_retries: int = 3,
+        qdrant_api_key: str = None,
     ):
         self.collection_name = collection_name
         self.vector_size = vector_size
         self.max_retries = max_retries
 
         # Initialize both adapters
-        self.qdrant = QdrantAdapter(qdrant_url, collection_name, vector_size, max_retries)
+        self.qdrant = QdrantAdapter(qdrant_url, collection_name, vector_size, max_retries, qdrant_api_key)
         try:
             self.milvus = MilvusAdapter(milvus_url, collection_name, vector_size)
             self.milvus_available = True
