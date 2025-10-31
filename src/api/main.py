@@ -50,6 +50,30 @@ async def lifespan(app: FastAPI):
     app.state.mongo_db = mongo_client[settings.mongo_db]
     logger.info(f"MongoDB connected: {settings.mongo_db}")
     
+    # Setup MongoDB indexes and remove problematic ones
+    try:
+        db = app.state.mongo_db
+        # Drop the problematic document_id index if it exists with null values
+        try:
+            existing_indexes = db.documents.list_indexes()
+            for index in existing_indexes:
+                if index.get("name") == "document_id_1":
+                    db.documents.drop_index("document_id_1")
+                    logger.info("Dropped problematic document_id_1 index")
+        except Exception as e:
+            logger.warning(f"Could not drop document_id index: {e}")
+        
+        # Create proper unique index on document_id (excluding nulls)
+        db.documents.create_index(
+            "document_id", 
+            unique=True, 
+            sparse=True,  # sparse=True allows multiple nulls
+            name="document_id_unique"
+        )
+        logger.info("Created document_id unique sparse index")
+    except Exception as e:
+        logger.warning(f"Error setting up MongoDB indexes: {e}")
+    
     # Redis
     redis_client = redis.from_url(settings.redis_url, decode_responses=True)
     app.state.redis_client = redis_client

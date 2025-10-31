@@ -41,12 +41,11 @@ class DenseRetriever:
             # Generate query embedding
             query_embedding = self.embedder.embed_single(query)
             
-            # Search vector DB
-            results = self.vector_manager.search(
-                collection_name=collection_name,
+            # Search vector DB (VectorDBManager uses self.collection_name, not passed as param)
+            results = await self.vector_manager.search(
                 query_vector=query_embedding,
                 top_k=top_k,
-                filter_dict=filters
+                filters=filters
             )
             
             return results

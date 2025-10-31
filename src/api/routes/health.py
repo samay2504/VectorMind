@@ -65,7 +65,8 @@ async def readiness_check(
     # LLM provider check (optional)
     try:
         from src.core.llm.provider import LLMProvider
-        llm = LLMProvider()
+        llm_config = {"temperature": 0.1, "provider_preference": ["google_genai", "groq", "openai"]}
+        llm = LLMProvider(llm_config)
         dependencies["llm_provider"] = "healthy"
     except Exception as e:
         dependencies["llm_provider"] = f"degraded: {str(e)}"

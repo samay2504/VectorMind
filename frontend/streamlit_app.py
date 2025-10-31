@@ -390,16 +390,12 @@ def query_rag(
         payload = {
             "query": query,
             "collection_name": collection_name,
-            "user_id": user_id,
-            "retrieval_strategy": retrieval_strategy,
-            "top_k": top_k
+            "top_k": top_k,
+            "use_rag": True
         }
         
-        if conversation_id:
-            payload["conversation_id"] = conversation_id
-        
         response = requests.post(
-            f"{API_URL}/query/rag",
+            f"{API_URL}/query/",
             json=payload,
             timeout=30
         )
@@ -438,13 +434,26 @@ def display_sources(sources: List[Dict]):
     for i, source in enumerate(sources, 1):
         with st.expander(f"Source {i} - Score: {source.get('score', 0):.3f}"):
             st.markdown(f"**Content:**")
-            st.text(source.get('content', '')[:500] + "..." if len(source.get('content', '')) > 500 else source.get('content', ''))
+            # Get text from either 'text' or 'content' field (backend uses 'text')
+            text_content = source.get('text', '') or source.get('content', '')
+            if text_content:
+                display_text = text_content[:500] + "..." if len(text_content) > 500 else text_content
+                st.text(display_text)
+            else:
+                st.warning("No content available")
             
+            # Display metadata
             metadata = source.get('metadata', {})
             if metadata:
                 st.markdown("**Metadata:**")
                 for key, value in metadata.items():
                     st.text(f"  • {key}: {value}")
+            
+            # Display source document info
+            if source.get('filename'):
+                st.markdown(f"**Source File:** `{source.get('filename')}`")
+            if source.get('document_id'):
+                st.markdown(f"**Document ID:** `{source.get('document_id')[:8]}...`")
 
 
 def main():
@@ -789,7 +798,13 @@ def main():
                             score_color = "#00ff9d" if score > 0.7 else "#00d4ff" if score > 0.4 else "#0099ff"
                             
                             with st.expander(f"🔹 Source Vector {i} | Similarity: {score:.3f}", expanded=(i==1)):
-                                content = source.get('content', '')
+                                # Get content from 'text' field (backend uses 'text', not 'content')
+                                content = source.get('text', '') or source.get('content', '')
+                                
+                                if not content:
+                                    st.warning("⚠️ No content available for this source")
+                                    continue
+                                    
                                 preview = content[:500] + "..." if len(content) > 500 else content
                                 
                                 st.markdown(f'''
@@ -812,11 +827,19 @@ def main():
                                         background: rgba(0, 0, 0, 0.3);
                                         border-radius: 8px;
                                         line-height: 1.6;
+                                        white-space: pre-wrap;
+                                        word-wrap: break-word;
                                     ">
                                         {preview}
                                     </div>
                                 </div>
                                 ''', unsafe_allow_html=True)
+                                
+                                # Display filename and document info
+                                if source.get('filename'):
+                                    st.markdown(f"**📄 Source File:** `{source.get('filename')}`")
+                                if source.get('document_id'):
+                                    st.markdown(f"**🔗 Document ID:** `{source.get('document_id')[:16]}...`")
                                 
                                 metadata = source.get('metadata', {})
                                 if metadata:

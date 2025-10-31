@@ -131,9 +131,18 @@ class QdrantAdapter(VectorDBAdapter):
         payloads: List[Dict[str, Any]],
         ids: Optional[List[str]] = None,
     ) -> bool:
-        """Index vectors in Qdrant"""
+        """Index vectors in Qdrant with auto-collection creation"""
         try:
             from qdrant_client.models import PointStruct
+            
+            # Check if collection exists, create if not
+            try:
+                self._client.get_collection(collection_name)
+            except Exception:
+                # Collection doesn't exist, create it
+                logger.info(f"Collection {collection_name} not found, creating it...")
+                vector_size = len(vectors[0]) if vectors else 384  # Default to 384 if empty
+                await self.create_collection(collection_name, vector_size)
 
             if ids is None:
                 import uuid
@@ -146,7 +155,7 @@ class QdrantAdapter(VectorDBAdapter):
             ]
 
             self._client.upsert(collection_name=collection_name, points=points)
-            logger.info(f"Indexed {len(vectors)} vectors in Qdrant")
+            logger.info(f"Indexed {len(vectors)} vectors in Qdrant collection: {collection_name}")
             return True
         except Exception as e:
             logger.error(f"Failed to index vectors in Qdrant: {e}")
@@ -348,10 +357,16 @@ class MilvusAdapter(VectorDBAdapter):
         payloads: List[Dict[str, Any]],
         ids: Optional[List[str]] = None,
     ) -> bool:
-        """Index vectors in Milvus"""
+        """Index vectors in Milvus with auto-collection creation"""
         try:
-            from pymilvus import Collection
+            from pymilvus import Collection, utility
 
+            # Check if collection exists, create if not
+            if not utility.has_collection(collection_name):
+                logger.info(f"Collection {collection_name} not found, creating it...")
+                vector_size = len(vectors[0]) if vectors else 384  # Default to 384 if empty
+                await self.create_collection(collection_name, vector_size)
+            
             if ids is None:
                 import uuid
 
@@ -362,7 +377,7 @@ class MilvusAdapter(VectorDBAdapter):
 
             collection.insert(entities)
             collection.flush()
-            logger.info(f"Indexed {len(vectors)} vectors in Milvus")
+            logger.info(f"Indexed {len(vectors)} vectors in Milvus collection: {collection_name}")
             return True
         except Exception as e:
             logger.error(f"Failed to index vectors in Milvus: {e}")

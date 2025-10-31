@@ -9,7 +9,14 @@ import os
 # Add src to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 
-from core.ingestion.embedder import Embedder
+# Dynamically load Embedder from src/core/ingestion/embedder.py to avoid static import resolution issues
+import importlib.util
+_embedder_path = os.path.join(os.path.dirname(__file__), '..', 'src', 'core', 'ingestion', 'embedder.py')
+_spec = importlib.util.spec_from_file_location("core.ingestion.embedder", os.path.normpath(_embedder_path))
+_embedder_module = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_embedder_module)
+Embedder = _embedder_module.Embedder
+
 import numpy as np
 
 

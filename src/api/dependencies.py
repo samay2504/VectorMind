@@ -39,9 +39,12 @@ def get_redis_client(request: Request) -> redis.Redis:
 
 def get_llm_provider() -> LLMProvider:
     """Get LLM provider instance"""
-    return LLMProvider()
+    llm_config = {"temperature": 0.1, "provider_preference": ["google_genai", "groq", "openai"]}
+    return LLMProvider(llm_config)
 
 
 def get_embedder() -> Embedder:
-    """Get embedder instance"""
-    return Embedder()
+    """Get embedder instance with GPU support"""
+    import torch
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    return Embedder(device=device)
