@@ -30,8 +30,9 @@ def test_chunk_text_with_metadata(sample_text, sample_metadata):
     
     assert len(chunks) > 0
     for chunk in chunks:
-        assert chunk.get("source") == "test"
-        assert chunk.get("author") == "test_user"
+        assert "metadata" in chunk
+        assert chunk["metadata"].get("source") == "test"
+        assert chunk["metadata"].get("author") == "test_user"
 
 
 def test_empty_text():
