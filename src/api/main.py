@@ -23,9 +23,43 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI):
     """Lifecycle events"""
     logger.info(f"Starting {settings.app_name} v{settings.app_version}")
-    # TODO: Initialize connections (vector DB, MongoDB, Redis)
+    
+    # Initialize connections
+    from src.core.vector_adapter import VectorDBManager
+    from pymongo import MongoClient
+    import redis
+    
+    # Vector DB
+    vector_manager = VectorDBManager()
+    app.state.vector_manager = vector_manager
+    logger.info("Vector DB manager initialized")
+    
+    # MongoDB
+    mongo_client = MongoClient(settings.mongo_uri)
+    app.state.mongo_client = mongo_client
+    app.state.mongo_db = mongo_client[settings.mongo_db_name]
+    logger.info(f"MongoDB connected: {settings.mongo_db_name}")
+    
+    # Redis
+    redis_client = redis.from_url(settings.redis_url, decode_responses=True)
+    app.state.redis_client = redis_client
+    logger.info("Redis connected")
+    
     yield
-    # TODO: Cleanup connections
+    
+    # Cleanup connections
+    try:
+        mongo_client.close()
+        logger.info("MongoDB connection closed")
+    except Exception as e:
+        logger.error(f"Error closing MongoDB: {e}")
+    
+    try:
+        redis_client.close()
+        logger.info("Redis connection closed")
+    except Exception as e:
+        logger.error(f"Error closing Redis: {e}")
+    
     logger.info("Shutting down application")
 
 
@@ -52,13 +86,12 @@ def create_app() -> FastAPI:
     
     # Import and include routers
     from src.api.routes import health
-    app.include_router(health.router, tags=["Health"])
+    from src.api.routes import ingest, query, dsar
     
-    # TODO: Add other routers when implemented
-    # from src.api.routes import ingest, query, dsar
-    # app.include_router(ingest.router, prefix="/ingest", tags=["Ingestion"])
-    # app.include_router(query.router, prefix="/query", tags=["Query"])
-    # app.include_router(dsar.router, prefix="/dsar", tags=["DSAR"])
+    app.include_router(health.router, tags=["Health"])
+    app.include_router(ingest.router, prefix="/ingest", tags=["Ingestion"])
+    app.include_router(query.router, prefix="/query", tags=["Query"])
+    app.include_router(dsar.router, prefix="/dsar", tags=["DSAR"])
     
     # Prometheus metrics (if enabled)
     if settings.enable_metrics:
