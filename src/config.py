@@ -4,12 +4,19 @@ Configuration management for the RAG system
 import os
 from typing import List, Optional
 
-from pydantic import Field
+from pydantic import ConfigDict, Field
 from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
     """Application settings with environment variable support"""
+    
+    model_config = ConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        case_sensitive=False,
+        extra="ignore"  # Ignore extra fields from .env
+    )
 
     # Application
     app_name: str = Field(default="multimodal-rag-system", alias="APP_NAME")
@@ -132,11 +139,6 @@ class Settings(BaseSettings):
     conversation_memory_enabled: bool = Field(default=True, alias="CONVERSATION_MEMORY_ENABLED")
     conversation_ttl_seconds: int = Field(default=3600, alias="CONVERSATION_TTL_SECONDS")
     max_conversation_history: int = Field(default=10, alias="MAX_CONVERSATION_HISTORY")
-
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-        case_sensitive = False
 
 
 # Global settings instance

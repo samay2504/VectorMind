@@ -85,3 +85,8 @@ class Embedder:
     def dimension(self) -> int:
         """Alias for get_embedding_dimension"""
         return self.get_embedding_dimension()
+
+    @property
+    def embedding_dim(self) -> int:
+        """Get the embedding dimension (property for tests)"""
+        return self.get_embedding_dimension()
